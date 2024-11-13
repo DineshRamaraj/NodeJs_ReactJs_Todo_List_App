@@ -49,7 +49,6 @@ const Todo = () => {
       const userId = localStorage.getItem("user_id");
 
       setTodoIsLoading(false);
-      // const apiUrl = `https://dintodoapi.onrender.com/api/${userId}/todo`;
 
       const apiUrl = `http://localhost:5000/api/${userId}/todo`;
 
@@ -93,7 +92,6 @@ const Todo = () => {
           setMainContent={setMainContent}
           setShowMainPage={setShowMainPage}
           showMainPage={showMainPage}
-          inputValues={inputHandle}
         />
       )}
       {showMainPage && mainContent === "Delete" && (

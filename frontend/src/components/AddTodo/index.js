@@ -4,6 +4,7 @@ import CustomSpinner from "../Loading";
 import Cookies from "js-cookie";
 import { IoMdClose } from "react-icons/io";
 import { toast } from "react-hot-toast";
+import api from "../AxiosAPI";
 
 const uuid = shortUUID.generate;
 
@@ -22,12 +23,7 @@ const statusList = [
   },
 ];
 
-const AddTodo = ({
-  setMainContent,
-  setShowMainPage,
-  showMainPage,
-  inputValues,
-}) => {
+const AddTodo = ({ setMainContent, setShowMainPage, showMainPage }) => {
   const [inputHandle, setInputHandle] = useState({
     title: "",
     description: "",
@@ -45,7 +41,7 @@ const AddTodo = ({
 
     // const apiUrl = `https://dintodoapi.onrender.com/api/${userId}/todo`;
 
-    const apiUrl = `http://localhost:5000/api/${userId}/todo`;
+    // const apiUrl = `http://localhost:5000/api/${userId}/todo`;
 
     const userDetails = {
       title: inputHandle.title,
@@ -53,41 +49,30 @@ const AddTodo = ({
       status: inputHandle.status,
     };
 
-    console.log(userDetails);
+    try {
+      const response = await api.post(`/${userId}/todo`, userDetails, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      });
 
-    // console.log(jwtToken);
-
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${jwtToken}`,
-      },
-      body: JSON.stringify(userDetails),
-    };
-
-    // console.log("Level 3");
-    const response = await fetch(apiUrl, options);
-    const data = await response.json();
-
-    // console.log("Level 4");
-    // const userId1 = localStorage.getItem("user_id");
-    // const userName = localStorage.getItem("user_name");
-    // console.log("Level 1");
-    // console.log(userId1, userName);
-
-    if (response.ok === true) {
-      setShowErrorMsg("");
-      setInputHandle({ title: "", description: "", status: "" });
-      toast.success(data.message);
-    } else {
-      // console.log("It is returned Error");
-      setShowErrorMsg(data.message);
-      toast.error(data.message);
+      if (response.status >= 200 && response.status < 300) {
+        setShowErrorMsg("");
+        setInputHandle({ title: "", description: "", status: "" });
+        toast.success(response.data.message);
+      } else {
+        setShowErrorMsg(response.data.message);
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      setShowErrorMsg("An error occurred. Please try again.");
+      toast.error("An error occurred. Please try again.");
+    } finally {
+      setIsLoading(false);
+      setMainContent("");
+      setShowMainPage(false);
     }
-    setIsLoading(false);
-    setMainContent("");
-    setShowMainPage(false);
   };
 
   return (
@@ -201,3 +186,42 @@ const AddTodo = ({
 };
 
 export default AddTodo;
+
+
+
+    // console.log(userDetails);
+
+    // console.log(jwtToken);
+
+    // const options = {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: `Bearer ${jwtToken}`,
+    //   },
+    //   body: JSON.stringify(userDetails),
+    // };
+
+    // console.log("Level 3");
+    // const response = await fetch(apiUrl, options);
+    // const data = await response.json();
+
+    // console.log("Level 4");
+    // const userId1 = localStorage.getItem("user_id");
+    // const userName = localStorage.getItem("user_name");
+    // console.log("Level 1");
+    // console.log(userId1, userName);
+
+    //   if (response.ok === true) {
+    //     setShowErrorMsg("");
+    //     setInputHandle({ title: "", description: "", status: "" });
+    //     toast.success(data.message);
+    //   } else {
+    //     // console.log("It is returned Error");
+    //     setShowErrorMsg(data.message);
+    //     toast.error(data.message);
+    //   }
+    //   setIsLoading(false);
+    //   setMainContent("");
+    //   setShowMainPage(false);
+    // };
