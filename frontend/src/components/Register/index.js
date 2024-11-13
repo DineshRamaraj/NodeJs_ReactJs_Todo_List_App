@@ -31,9 +31,8 @@ const Register = () => {
     event.preventDefault();
     setIsLoading(true);
 
-    // const apiUrl = "https://dintodoapi.onrender.com/api/user/register";
 
-    const apiUrl = `http://localhost:5000/api/user/register`;
+    const apiUrl = `https://nxt-todo-app.onrender.com/api/user/register`;
 
     const userDetails = {
       name: inputHandle.name,

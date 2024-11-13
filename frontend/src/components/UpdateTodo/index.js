@@ -39,9 +39,8 @@ const UpdateTodo = ({ setMainContent, setShowMainPage, showMainPage, inputValues
 
     const todoId = localStorage.getItem("todoId");
 
-    // const apiUrl = `https://dintodoapi.onrender.com/api/${userId}/todo/${todoId}`;
 
-    const apiUrl = `http://localhost:5000/api/${userId}/todo/${todoId}`;
+    const apiUrl = `https://nxt-todo-app.onrender.com/api/${userId}/todo/${todoId}`;
 
     const userDetails = {
       title: inputHandle.title,

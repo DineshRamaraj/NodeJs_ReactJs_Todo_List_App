@@ -39,10 +39,6 @@ const AddTodo = ({ setMainContent, setShowMainPage, showMainPage }) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // const apiUrl = `https://dintodoapi.onrender.com/api/${userId}/todo`;
-
-    // const apiUrl = `http://localhost:5000/api/${userId}/todo`;
-
     const userDetails = {
       title: inputHandle.title,
       description: inputHandle.description || "This is My Description",

@@ -16,7 +16,7 @@ const DeleteTodo = ({ showMainPage, setShowMainPage, setMainContent }) => {
 
     // const apiUrl = `https://dintodoapi.onrender.com/api/${userId}/todo/${todoId}`;
 
-    const apiUrl = `http://localhost:5000/api/${userId}/todo/${todoId}`;
+    const apiUrl = `https://nxt-todo-app.onrender.com/api/${userId}/todo/${todoId}`;
 
     const options = {
       method: "DELETE",

@@ -50,7 +50,7 @@ const Todo = () => {
 
       setTodoIsLoading(false);
 
-      const apiUrl = `http://localhost:5000/api/${userId}/todo`;
+      const apiUrl = `https://nxt-todo-app.onrender.com/api/${userId}/todo`;
 
       const options = {
         method: "GET",
