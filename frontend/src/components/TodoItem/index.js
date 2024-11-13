@@ -15,7 +15,7 @@ const TodoItem = ({
       <div className="border border-slate-400 rounded-md p-4 w-[100%] flex flex-col justify-between">
         <div className="flex flex-col">
           <div className="flex justify-between items-center">
-            <span className="text-slate-800 text-md font-semibold text-[roboto] w-[90%]">
+            <span className="text-slate-800 text-md font-medium w-[90%]">
               {title.slice(0, 12)}
               {title.length > 12 && "..."}
             </span>
@@ -56,7 +56,7 @@ const TodoItem = ({
               status === "Pending"
                 ? "rounded-full bg-red-600"
                 : status === "Progress"
-                ? "rounded-full bg-yellow-400"
+                ? "rounded-full bg-yellow-500"
                 : "rounded-full bg-green-600"
             } p-1 mr-1`}
           ></span>

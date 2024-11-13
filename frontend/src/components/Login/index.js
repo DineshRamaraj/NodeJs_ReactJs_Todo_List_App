@@ -24,7 +24,8 @@ const Login = () => {
     event.preventDefault();
     setIsLoading(true);
 
-    const apiUrl = "https://dintodoapi.onrender.com/api/user/login";
+    // const apiUrl = "https://dintodoapi.onrender.com/api/user/login";
+    const apiUrl = "http://localhost:5000/api/user/login"
 
     const userDetails = {
       email: inputHandle.email,
@@ -44,7 +45,7 @@ const Login = () => {
     if (response.ok === true) {
       setShowErrorMsg("");
       setIsLoading(false);
-      console.log(data);
+      // console.log(data);
       toast.success(data.message);
       Cookies.set("jwt_token", data.jwt_token);
       localStorage.setItem("user_id", data.user_id);

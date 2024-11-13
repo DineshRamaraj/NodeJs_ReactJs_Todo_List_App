@@ -2,11 +2,11 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const ConnectionDB = require("./config/database");
-const router = require("./routes/MainRoutes");
+// const router = require("./routes/MainRoutes");
 const TodoRouter = require("./routes/TodoRouter");
 const UserRouter = require("./routes/UserRouter");
 dotenv.config();
-const { PORT } = process.env;
+const PORT = process.env.PORT || 5000;
 const app = express();
 ConnectionDB();
 
@@ -22,8 +22,10 @@ process.on("unhandledRejection", (reason, promise) => {
 });
 
 app.use(function (req, res) {
-  res.status(404).json({ status: "failure", message: "Not Found" });
+  res.status(404).json({ status: "failure", message: "Not Found Any Route" });
 });
+
+
 
 app.listen(PORT, function () {
   console.log(`Server is listening at ${PORT}`);
