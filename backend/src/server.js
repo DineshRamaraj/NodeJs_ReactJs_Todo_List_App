@@ -13,9 +13,20 @@ ConnectionDB();
 app.use(cors());
 app.use(express.json());
 app.use((req, res, next) => {
-  console.log('Client IP:', req.ip); // Logs the client's IP
-  console.log('X-Forwarded-For:', req.headers['x-forwarded-for']); // Logs the forwarded IPs
+  console.log("Client IP:", req.ip); // Logs the client's IP
+  console.log("X-Forwarded-For:", req.headers["x-forwarded-for"]); // Logs the forwarded IPs
   next();
+});
+
+app.use((req, res, next) => {
+  async () => {
+    if (mongoose.Types.ObjectId.isValid(req.user_id || req.todo_id)) {
+      const user = await User.findById(id); // Mongoose handles the conversion
+      console.log("User:", user);
+    } else {
+      console.error("Invalid ObjectId:", id);
+    }
+  };
 });
 
 app.use("/api", TodoRouter);
@@ -29,8 +40,6 @@ process.on("unhandledRejection", (reason, promise) => {
 app.use(function (req, res) {
   res.status(404).json({ status: "failure", message: "Not Found Any Route" });
 });
-
-
 
 app.listen(PORT, function () {
   console.log(`Server is listening at ${PORT}`);
