@@ -27,6 +27,7 @@ app.use((req, res, next) => {
       console.error("Invalid ObjectId:", id);
     }
   };
+  next();
 });
 
 app.use("/api", TodoRouter);
