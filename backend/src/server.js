@@ -19,14 +19,14 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  async () => {
-    if (mongoose.Types.ObjectId.isValid(req.user_id || req.todo_id)) {
-      const user = await User.findById(id); // Mongoose handles the conversion
-      console.log("User:", user);
-    } else {
-      console.error("Invalid ObjectId:", id);
-    }
-  };
+  // async () => {
+  //   if (mongoose.Types.ObjectId.isValid(req.user_id || req.todo_id)) {
+  //     const user = await User.findById(id); // Mongoose handles the conversion
+  //     console.log("User:", user);
+  //   } else {
+  //     console.error("Invalid ObjectId:", id);
+  //   }
+  // };
   next();
 });
 
