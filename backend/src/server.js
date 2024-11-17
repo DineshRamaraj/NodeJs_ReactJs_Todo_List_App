@@ -12,6 +12,11 @@ ConnectionDB();
 
 app.use(cors());
 app.use(express.json());
+app.use((req, res, next) => {
+  console.log('Client IP:', req.ip); // Logs the client's IP
+  console.log('X-Forwarded-For:', req.headers['x-forwarded-for']); // Logs the forwarded IPs
+  next();
+});
 
 app.use("/api", TodoRouter);
 app.use("/api", UserRouter);
